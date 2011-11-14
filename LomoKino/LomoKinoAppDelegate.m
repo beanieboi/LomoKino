@@ -94,15 +94,18 @@
 
         // Writing file to disk
         [imageData writeToFile: @"/Users/ben/Desktop/lomokino-samples/flatbed_with-sprockets_ben/2769_02_border.jpg" atomically: NO];
-        [target release];
+        //[target release];
     //}
     
     
     QTMovie *originalMovie = [QTMovie movie];
-    [originalMovie addImage:target forDuration:QTMakeTime(2, 2) withAttributes:nil];
-    NSLog(@"added frame");
-    [originalMovie writeToFile:@"/Users/ben/Desktop/lomokino-samples/flatbed_with-sprockets_ben/movie.mp4" withAttributes:nil];
 
+    QTTime time = QTMakeTime(1, 10);
+    NSDictionary *attrs = [NSDictionary dictionaryWithObject:@"jpg " forKey:QTAddImageCodecType];
+    [originalMovie addImage:target forDuration:time withAttributes:attrs];
+
+    [originalMovie writeToFile:@"/Users/ben/Desktop/lomokino-samples/flatbed_with-sprockets_ben/movie.mp4" withAttributes:nil];
+    [originalMovie updateMovieFile];
     [source release];
 }
 
