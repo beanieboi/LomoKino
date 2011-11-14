@@ -13,6 +13,9 @@
 		B51467B6146D94DA00A17E68 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B51467B4146D94DA00A17E68 /* Credits.rtf */; };
 		B51467B9146D94DA00A17E68 /* LomoKinoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B51467B8146D94DA00A17E68 /* LomoKinoAppDelegate.m */; };
 		B51467BC146D94DA00A17E68 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B51467BA146D94DA00A17E68 /* MainMenu.xib */; };
+		B51467C4146DA0F200A17E68 /* LomoKinoMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = B51467C3146DA0F200A17E68 /* LomoKinoMovie.m */; };
+		B547490D1470F6320082588D /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B547490C1470F6320082588D /* QuickTime.framework */; };
+		B5D17BC01470F79F0004B38A /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5D17BBF1470F79F0004B38A /* QTKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,14 +24,18 @@
 		B51467A8146D94DA00A17E68 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		B51467A9146D94DA00A17E68 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		B51467AA146D94DA00A17E68 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		B51467AD146D94DA00A17E68 /* LomoKino-Info.plist */ = {isa = PBXFileReference; path = "LomoKino-Info.plist"; sourceTree = "<group>"; };
+		B51467AD146D94DA00A17E68 /* LomoKino-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LomoKino-Info.plist"; sourceTree = "<group>"; };
 		B51467AF146D94DA00A17E68 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B51467B1146D94DA00A17E68 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B51467B3146D94DA00A17E68 /* LomoKino-Prefix.pch */ = {isa = PBXFileReference; path = "LomoKino-Prefix.pch"; sourceTree = "<group>"; };
+		B51467B3146D94DA00A17E68 /* LomoKino-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LomoKino-Prefix.pch"; sourceTree = "<group>"; };
 		B51467B5146D94DA00A17E68 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		B51467B7146D94DA00A17E68 /* LomoKinoAppDelegate.h */ = {isa = PBXFileReference; path = LomoKinoAppDelegate.h; sourceTree = "<group>"; };
+		B51467B7146D94DA00A17E68 /* LomoKinoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LomoKinoAppDelegate.h; sourceTree = "<group>"; };
 		B51467B8146D94DA00A17E68 /* LomoKinoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LomoKinoAppDelegate.m; sourceTree = "<group>"; };
 		B51467BB146D94DA00A17E68 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		B51467C2146DA0F200A17E68 /* LomoKinoMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LomoKinoMovie.h; sourceTree = "<group>"; };
+		B51467C3146DA0F200A17E68 /* LomoKinoMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LomoKinoMovie.m; sourceTree = "<group>"; };
+		B547490C1470F6320082588D /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = System/Library/Frameworks/QuickTime.framework; sourceTree = SDKROOT; };
+		B5D17BBF1470F79F0004B38A /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +43,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5D17BC01470F79F0004B38A /* QTKit.framework in Frameworks */,
+				B547490D1470F6320082588D /* QuickTime.framework in Frameworks */,
 				B51467A6146D94DA00A17E68 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,6 +55,8 @@
 		B5146796146D94DA00A17E68 = {
 			isa = PBXGroup;
 			children = (
+				B5D17BBF1470F79F0004B38A /* QTKit.framework */,
+				B547490C1470F6320082588D /* QuickTime.framework */,
 				B51467AB146D94DA00A17E68 /* LomoKino */,
 				B51467A4146D94DA00A17E68 /* Frameworks */,
 				B51467A2146D94DA00A17E68 /* Products */,
@@ -86,6 +97,8 @@
 				B51467B8146D94DA00A17E68 /* LomoKinoAppDelegate.m */,
 				B51467BA146D94DA00A17E68 /* MainMenu.xib */,
 				B51467AC146D94DA00A17E68 /* Supporting Files */,
+				B51467C2146DA0F200A17E68 /* LomoKinoMovie.h */,
+				B51467C3146DA0F200A17E68 /* LomoKinoMovie.m */,
 			);
 			path = LomoKino;
 			sourceTree = "<group>";
@@ -127,6 +140,9 @@
 /* Begin PBXProject section */
 		B5146798146D94DA00A17E68 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = B514679B146D94DA00A17E68 /* Build configuration list for PBXProject "LomoKino" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -164,6 +180,7 @@
 			files = (
 				B51467B2146D94DA00A17E68 /* main.m in Sources */,
 				B51467B9146D94DA00A17E68 /* LomoKinoAppDelegate.m in Sources */,
+				B51467C4146DA0F200A17E68 /* LomoKinoMovie.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +218,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -227,7 +244,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -245,10 +262,12 @@
 		B51467C0146D94DA00A17E68 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LomoKino/LomoKino-Prefix.pch";
 				INFOPLIST_FILE = "LomoKino/LomoKino-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "i386 x86_64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -256,6 +275,7 @@
 		B51467C1146D94DA00A17E68 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LomoKino/LomoKino-Prefix.pch";
 				INFOPLIST_FILE = "LomoKino/LomoKino-Info.plist";
@@ -283,6 +303,7 @@
 				B51467C1146D94DA00A17E68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
