@@ -70,41 +70,50 @@
         }
     }
 
-    //for (int idx = 0; idx < [possiblePixelsToCut count]; idx++) {
-        //NSNumber *column = [columnsToCut objectAtIndex:idx];
+    QTMovie *originalMovie = [[QTMovie alloc] initToWritableFile:@"/Users/ben/Desktop/lomokino-samples/flatbed_with-sprockets_ben/movie.mp4" error:NULL];
 
-        NSRect targetRect = NSMakeRect(0, 0, 485, [rawImg pixelsHigh]);
-        NSRect sourceRect = NSMakeRect(0, 0, 485/16.7, [rawImg pixelsHigh]/16.7);
+    for (int idx = 0; idx < [columnsToCut count]; idx++) {
+        if (idx+1 < [columnsToCut count]-1) {
+            NSNumber *current = [columnsToCut objectAtIndex:idx];
+            NSNumber *next = [columnsToCut objectAtIndex:idx+1];
+            int width = [next intValue] - [current intValue];
+            
+            NSLog(@"TARGET CURRENT:%d DIFF:%d", [current intValue], width);
+            NSLog(@"SOURCE CURRENT:%f DIFF:%f", [current intValue]/16.7, width/16.7);
+            
+            NSRect targetRect = NSMakeRect(0, 0, width, [rawImg pixelsHigh]);
+            NSRect sourceRect = NSMakeRect([current intValue]/16.7, 0, width/16.7, [rawImg pixelsHigh]/16.7);
+            
+            //0,0,485,
+            
+            NSImage *target = [[NSImage alloc]initWithSize:targetRect.size];
+            
+            [target lockFocus];
+            //draw the portion of the source image on target image
+            [source drawInRect:targetRect 
+                      fromRect:sourceRect
+                     operation:NSCompositeCopy
+                      fraction:1.0];
+            //end drawing
+            [target unlockFocus];
+            
+            QTTime time = QTMakeTime(2, 10);
+            NSDictionary *attrs = [NSDictionary dictionaryWithObject:@"jpeg" forKey:QTAddImageCodecType];
+            
+            [originalMovie addImage:target forDuration:time withAttributes:attrs];
+            
+            // Writing file to disk
+            //NSData *imageData = [target  TIFFRepresentation];
+            //NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
+            //imageData = [imageRep representationUsingType:NSJPEGFileType properties:nil];
+            
+            //NSString *filePath = [NSString stringWithFormat:@"/Users/ben/Desktop/lomokino-samples/flatbed_with-sprockets_ben/2769_02_frame%d.jpg", idx];
+            //[imageData writeToFile: filePath atomically: NO];        
+            //[target release];
+        }
+    }
 
-        NSImage *target = [[NSImage alloc]initWithSize:targetRect.size];
-
-        [target lockFocus];
-        //draw the portion of the source image on target image
-        [source drawInRect:targetRect 
-                  fromRect:sourceRect
-                 operation:NSCompositeCopy
-                  fraction:1.0];
-        //end drawing
-        [target unlockFocus];
-
-        NSData *imageData = [target  TIFFRepresentation];
-        NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
-
-        imageData = [imageRep representationUsingType:NSJPEGFileType properties:nil];
-
-        // Writing file to disk
-        [imageData writeToFile: @"/Users/ben/Desktop/lomokino-samples/flatbed_with-sprockets_ben/2769_02_border.jpg" atomically: NO];
-        //[target release];
-    //}
-    
-    
-    QTMovie *originalMovie = [QTMovie movie];
-
-    QTTime time = QTMakeTime(1, 10);
-    NSDictionary *attrs = [NSDictionary dictionaryWithObject:@"jpg " forKey:QTAddImageCodecType];
-    [originalMovie addImage:target forDuration:time withAttributes:attrs];
-
-    [originalMovie writeToFile:@"/Users/ben/Desktop/lomokino-samples/flatbed_with-sprockets_ben/movie.mp4" withAttributes:nil];
+    NSLog(@"done... update movie");
     [originalMovie updateMovieFile];
     [source release];
 }
