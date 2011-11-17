@@ -8,6 +8,7 @@
 
 #import "LomoKinoAppDelegate.h"
 #import "QTKit/QTKit.h"
+#import "NSImage+Rotate.h"
 
 @implementation LomoKinoAppDelegate
 
@@ -77,17 +78,16 @@
             NSNumber *current = [columnsToCut objectAtIndex:idx];
             NSNumber *next = [columnsToCut objectAtIndex:idx+1];
             int width = [next intValue] - [current intValue];
-            
+
             NSLog(@"TARGET CURRENT:%d DIFF:%d", [current intValue], width);
             NSLog(@"SOURCE CURRENT:%f DIFF:%f", [current intValue]/16.7, width/16.7);
-            
+
             NSRect targetRect = NSMakeRect(0, 0, width, [rawImg pixelsHigh]);
             NSRect sourceRect = NSMakeRect([current intValue]/16.7, 0, width/16.7, [rawImg pixelsHigh]/16.7);
-            
+
             //0,0,485,
-            
             NSImage *target = [[NSImage alloc]initWithSize:targetRect.size];
-            
+
             [target lockFocus];
             //draw the portion of the source image on target image
             [source drawInRect:targetRect 
@@ -95,26 +95,32 @@
                      operation:NSCompositeCopy
                       fraction:1.0];
             //end drawing
+
             [target unlockFocus];
+
+            NSImage *rotatedImage = [target rotateIndividualImage:target clockwise:true];
             
             QTTime time = QTMakeTime(2, 10);
             NSDictionary *attrs = [NSDictionary dictionaryWithObject:@"jpeg" forKey:QTAddImageCodecType];
-            
-            [originalMovie addImage:target forDuration:time withAttributes:attrs];
-            
+
+            [originalMovie addImage:rotatedImage forDuration:time withAttributes:attrs];
+
+            [rotatedImage release];
             // Writing file to disk
             //NSData *imageData = [target  TIFFRepresentation];
             //NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
             //imageData = [imageRep representationUsingType:NSJPEGFileType properties:nil];
-            
+
             //NSString *filePath = [NSString stringWithFormat:@"/Users/ben/Desktop/lomokino-samples/flatbed_with-sprockets_ben/2769_02_frame%d.jpg", idx];
-            //[imageData writeToFile: filePath atomically: NO];        
-            //[target release];
+            //[imageData writeToFile: filePath atomically: NO];  
+            [originalMovie updateMovieFile];
+            [target release];
         }
     }
 
     NSLog(@"done... update movie");
     [originalMovie updateMovieFile];
+    [originalMovie release];
     [source release];
 }
 
