@@ -20,7 +20,7 @@
 
 @interface NSImage(Rotated)
 
-- (NSImage *)rotateIndividualImage: (NSImage *)image clockwise: (BOOL)clockwise;
+- (NSImage *)rotate:(NSImage *)image byAngle:(int)degrees;
 
 @end
 

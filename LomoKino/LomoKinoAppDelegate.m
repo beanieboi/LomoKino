@@ -98,7 +98,7 @@
 
             [target unlockFocus];
 
-            NSImage *rotatedImage = [target rotateIndividualImage:target clockwise:true];
+            NSImage *rotatedImage = [target rotate:target byAngle:-90];
             
             QTTime time = QTMakeTime(2, 10);
             NSDictionary *attrs = [NSDictionary dictionaryWithObject:@"jpeg" forKey:QTAddImageCodecType];

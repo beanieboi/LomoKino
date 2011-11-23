@@ -19,53 +19,30 @@
 #import "NSImage+Rotate.h"
 
 @implementation NSImage(Rotated)
-- (NSImage *)rotateIndividualImage: (NSImage *)image clockwise: (BOOL)clockwise
+
+
+- (NSImage *)rotate:(NSImage *)image byAngle:(int)degrees
 {
-    NSImage *existingImage = image;
-    NSSize existingSize;
-    
-    /**
-     * Get the size of the original image in its raw bitmap format.
-     * The bestRepresentationForDevice: nil tells the NSImage to just
-     * give us the raw image instead of it's wacky DPI-translated version.
-     */
-    existingSize.width = [[existingImage bestRepresentationForDevice: nil] pixelsWide];
-    existingSize.height = [[existingImage bestRepresentationForDevice: nil] pixelsHigh];
-    existingSize.height = [[existingImage bestRepresentationForDevice: nil] pixelsHigh];
-    
-    NSSize newSize = NSMakeSize(existingSize.height, existingSize.width);
-    NSImage *rotatedImage = [[NSImage alloc] initWithSize:newSize];
-    
-    [rotatedImage lockFocus];
-    
-    /**
-     * Apply the following transformations:
-     *
-     * - bring the rotation point to the centre of the image instead of
-     *   the default lower, left corner (0,0).
-     * - rotate it by 90 degrees, either clock or counter clockwise.
-     * - re-translate the rotated image back down to the lower left corner
-     *   so that it appears in the right place.
-     */
-    NSAffineTransform *rotateTF = [NSAffineTransform transform];
-    NSPoint centerPoint = NSMakePoint(newSize.width / 2, newSize.height / 2);
-    
-    [rotateTF translateXBy: centerPoint.x yBy: centerPoint.y];
-    [rotateTF rotateByDegrees: (clockwise) ? - 90 : 90];
-    [rotateTF translateXBy: -centerPoint.y yBy: -centerPoint.x];
-    [rotateTF concat];
-    
-    /**
-     * We have to get the image representation to do its drawing directly,
-     * because otherwise the stupid NSImage DPI thingie bites us in the butt
-     * again.
-     */
-    NSRect r1 = NSMakeRect(0, 0, newSize.height, newSize.width);
-    [[existingImage bestRepresentationForDevice: nil] drawInRect: r1];
-    
-    [rotatedImage unlockFocus];
-    
-    return rotatedImage;
+    if (degrees == 0) {
+        return image;
+    } else {
+        NSSize beforeSize = [image size];
+        NSSize afterSize = degrees == 90 || degrees == -90 ? NSMakeSize(beforeSize.height, beforeSize.width) : beforeSize;
+        NSImage* newImage = [[[NSImage alloc] initWithSize:afterSize] autorelease];
+        NSAffineTransform* trans = [NSAffineTransform transform];
+        
+        [newImage lockFocus];
+        [trans translateXBy:afterSize.width * 0.5 yBy:afterSize.height * 0.5];
+        [trans rotateByDegrees:degrees];
+        [trans translateXBy:-beforeSize.width * 0.5 yBy:-beforeSize.height * 0.5];
+        [trans set];
+        [image drawAtPoint:NSZeroPoint
+                  fromRect:NSMakeRect(0, 0, beforeSize.width, beforeSize.height)
+                 operation:NSCompositeCopy
+                  fraction:1.0];
+        [newImage unlockFocus];
+        return newImage;
+    }
 }
 
 @end
