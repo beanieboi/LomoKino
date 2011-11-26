@@ -10,8 +10,15 @@
 
 @interface LomoKinoAppDelegate : NSObject <NSApplicationDelegate> {
     NSWindow *window;
+    NSArray *image_urls;
+    NSURL *directory;
 }
 
+- (IBAction)process:(id)pId;
+- (IBAction)selectImages:(id)pId;
+
+@property (nonatomic, retain) NSURL *directory;
+@property (nonatomic, retain) NSArray *image_urls;
 @property (assign) IBOutlet NSWindow *window;
 
 @end

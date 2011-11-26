@@ -12,8 +12,6 @@
 
 @implementation LomoKinoMovie
 
-@synthesize image_paths;
-
 - (id)init
 {
     self = [super init];
@@ -126,16 +124,14 @@
     return cuttedImages;
 }
 
-- (void)saveToFile:(NSArray *)images to:(NSString *)movie_path
+- (void)addToMovie:(NSArray *)images to:(QTMovie *)movie
 {
-    QTMovie *originalMovie = [[QTMovie alloc] initToWritableFile:movie_path error:NULL];
-
     for (int i = 0; i < [images count]; i++) {
         NSImage *image = [images objectAtIndex:i];
         QTTime time = QTMakeTime(2, 10);
         NSDictionary *attrs = [NSDictionary dictionaryWithObject:@"jpeg" forKey:QTAddImageCodecType];
 
-        [originalMovie addImage:image forDuration:time withAttributes:attrs];
+        [movie addImage:image forDuration:time withAttributes:attrs];
 
         // Writing file to disk
         //NSData *imageData = [target  TIFFRepresentation];
@@ -144,23 +140,39 @@
 
         //NSString *filePath = [NSString stringWithFormat:@"/Users/ben/Desktop/lomokino-samples/flatbed_with-sprockets_ben/2769_02_frame%d.jpg", idx];
         //[imageData writeToFile: filePath atomically: NO];
-        [originalMovie updateMovieFile];
+        [movie updateMovieFile];
     }
-
-    [originalMovie release];
 }
 
-- (void)createMovie:(NSArray *)image_paths
+- (void)createMovie:(NSArray *)image_urls toDirectory:(NSURL *)directoy
 {
+    NSFileManager* fm = [[[NSFileManager alloc] init] autorelease];
     //Get the source image from file
-    NSImage *source = [[NSImage alloc]initWithContentsOfFile:@"/Users/ben/Desktop/lomokino-samples/flatbed_with-sprockets_ben/2769_02.jpg"];
+    NSString *movie_path = [[directoy path] stringByAppendingString:@"/movie.mp4"];
+    [fm removeItemAtPath:movie_path error:NULL];
 
-    NSArray *columnsToCut = [self parseImage:source];
+    NSLog(@"MOVIEPATH %@", movie_path);
 
-    NSArray *cuttedImages = [self cutImage:source at:columnsToCut rotate:TRUE];
+    for (int i = 0; i < [image_urls count]; i++) {
+        NSURL *url = [image_urls objectAtIndex:i];
+        
+        NSImage *source = [[NSImage alloc] initWithContentsOfURL:url];
+        NSArray *columnsToCut = [self parseImage:source];
+        NSArray *cuttedImages = [self cutImage:source at:columnsToCut rotate:TRUE];
 
-    [self saveToFile:cuttedImages to:@"/Users/ben/Desktop/lomokino-samples/flatbed_with-sprockets_ben/movie.mp4"];
-    [source release];
-    NSLog(@"done... update movie");
+        QTMovie *movie;
+        
+        if (i == 0) {
+            movie = [[QTMovie alloc] initToWritableFile:movie_path error:NULL];
+        } else {
+            movie = [[QTMovie alloc] initWithFile:movie_path error:NULL];
+            [movie setAttribute:[NSNumber numberWithBool:YES] forKey:QTMovieEditableAttribute];
+        }
+
+        [self addToMovie:cuttedImages to:movie];
+        
+        [source release];
+        NSLog(@"done... update movie");
+    }
 }
 @end

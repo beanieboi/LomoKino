@@ -12,14 +12,37 @@
 @implementation LomoKinoAppDelegate
 
 @synthesize window;
+@synthesize image_urls;
+@synthesize directory;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    NSArray *images = [NSArray arrayWithObjects:@"/Users/ben/Desktop/lomokino-samples/flatbed_with-sprockets_ben/2769_02.jpg",
-                                                @"/Users/ben/Desktop/lomokino-samples/flatbed_with-sprockets_ben/2769_03.jpg",
-                                                @"/Users/ben/Desktop/lomokino-samples/flatbed_with-sprockets_ben/2769_02.jpg",
-                                                nil];
-    //[[LomoKinoMovie alloc] createMovie:images];
+}
+
+- (IBAction)process:(id)pId {
+    if (image_urls == nil) {
+        return;
+    } else {
+        LomoKinoMovie *kino = [LomoKinoMovie alloc];
+        [kino createMovie:image_urls toDirectory:directory];
+        [kino release];
+    }
+}
+
+- (IBAction)selectImages:(id)pId {
+
+    NSOpenPanel *PanelObject = [NSOpenPanel openPanel];
+	[PanelObject setCanCreateDirectories:NO];
+	[PanelObject setCanChooseDirectories:NO];
+	[PanelObject setCanChooseFiles:YES];
+	[PanelObject setAllowsMultipleSelection:YES];
+
+	NSInteger PanelObjectResult = [PanelObject runModal];
+	if(PanelObjectResult)
+	{
+        self.image_urls = [PanelObject URLs];
+        self.directory = [PanelObject directoryURL];
+	}
 }
 
 @end
