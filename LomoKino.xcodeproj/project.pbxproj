@@ -15,7 +15,8 @@
 		B51467BC146D94DA00A17E68 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B51467BA146D94DA00A17E68 /* MainMenu.xib */; };
 		B51467C4146DA0F200A17E68 /* LomoKinoMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = B51467C3146DA0F200A17E68 /* LomoKinoMovie.m */; };
 		B53D09121475BCA90036F614 /* NSImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = B53D09111475BCA90036F614 /* NSImage+Rotate.m */; };
-		B547490D1470F6320082588D /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B547490C1470F6320082588D /* QuickTime.framework */; };
+		B579A41914805E9000AC479B /* LomoKino.png in Resources */ = {isa = PBXBuildFile; fileRef = B579A41814805E9000AC479B /* LomoKino.png */; };
+		B579A41A14806AB000AC479B /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B547490C1470F6320082588D /* QuickTime.framework */; };
 		B5D17BC01470F79F0004B38A /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5D17BBF1470F79F0004B38A /* QTKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		B53D09101475BCA90036F614 /* NSImage+Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+Rotate.h"; sourceTree = "<group>"; };
 		B53D09111475BCA90036F614 /* NSImage+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Rotate.m"; sourceTree = "<group>"; };
 		B547490C1470F6320082588D /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = System/Library/Frameworks/QuickTime.framework; sourceTree = SDKROOT; };
+		B579A41814805E9000AC479B /* LomoKino.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LomoKino.png; sourceTree = "<group>"; };
 		B5D17BBF1470F79F0004B38A /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -46,8 +48,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B579A41A14806AB000AC479B /* QuickTime.framework in Frameworks */,
 				B5D17BC01470F79F0004B38A /* QTKit.framework in Frameworks */,
-				B547490D1470F6320082588D /* QuickTime.framework in Frameworks */,
 				B51467A6146D94DA00A17E68 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,6 +60,7 @@
 		B5146796146D94DA00A17E68 = {
 			isa = PBXGroup;
 			children = (
+				B579A41814805E9000AC479B /* LomoKino.png */,
 				B5D17BBF1470F79F0004B38A /* QTKit.framework */,
 				B547490C1470F6320082588D /* QuickTime.framework */,
 				B51467AB146D94DA00A17E68 /* LomoKino */,
@@ -173,6 +176,7 @@
 				B51467B0146D94DA00A17E68 /* InfoPlist.strings in Resources */,
 				B51467B6146D94DA00A17E68 /* Credits.rtf in Resources */,
 				B51467BC146D94DA00A17E68 /* MainMenu.xib in Resources */,
+				B579A41914805E9000AC479B /* LomoKino.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

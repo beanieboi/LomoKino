@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LomoKinoMovie : NSObject
+@interface LomoKinoMovie : NSObject {
+    NSArray *image_paths;
+}
+
+@property (nonatomic, retain) NSArray *image_paths;
+
+- (void)createMovie:(NSArray *)image_paths;
 
 @end
