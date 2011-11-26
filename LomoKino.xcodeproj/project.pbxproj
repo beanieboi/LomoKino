@@ -40,6 +40,7 @@
 		B53D09111475BCA90036F614 /* NSImage+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Rotate.m"; sourceTree = "<group>"; };
 		B547490C1470F6320082588D /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = System/Library/Frameworks/QuickTime.framework; sourceTree = SDKROOT; };
 		B579A41814805E9000AC479B /* LomoKino.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LomoKino.png; sourceTree = "<group>"; };
+		B596C47114814EBC003792EE /* LomoKino.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LomoKino.entitlements; sourceTree = "<group>"; };
 		B5D17BBF1470F79F0004B38A /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -99,6 +100,7 @@
 		B51467AB146D94DA00A17E68 /* LomoKino */ = {
 			isa = PBXGroup;
 			children = (
+				B596C47114814EBC003792EE /* LomoKino.entitlements */,
 				B51467B7146D94DA00A17E68 /* LomoKinoAppDelegate.h */,
 				B51467B8146D94DA00A17E68 /* LomoKinoAppDelegate.m */,
 				B51467BA146D94DA00A17E68 /* MainMenu.xib */,
@@ -228,7 +230,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -254,7 +256,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -273,10 +275,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_ENTITLEMENTS = LomoKino/LomoKino.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LomoKino/LomoKino-Prefix.pch";
 				INFOPLIST_FILE = "LomoKino/LomoKino-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.6;
 				VALID_ARCHS = "i386 x86_64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -286,10 +291,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_ENTITLEMENTS = LomoKino/LomoKino.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LomoKino/LomoKino-Prefix.pch";
 				INFOPLIST_FILE = "LomoKino/LomoKino-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
