@@ -11,8 +11,10 @@
 @implementation NSImage(Rotated)
 
 
-- (NSImage *)rotate:(NSImage *)image byAngle:(int)degrees
+- (NSImage *)rotate:(int)degrees
 {
+    NSImage *image = self;
+
     if (degrees == 0) {
         return image;
     } else {

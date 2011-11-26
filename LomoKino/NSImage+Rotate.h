@@ -10,7 +10,6 @@
 
 @interface NSImage(Rotated)
 
-- (NSImage *)rotate:(NSImage *)image byAngle:(int)degrees;
-
+- (NSImage *)rotate:(int)degrees;
 @end
 
