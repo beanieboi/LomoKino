@@ -146,12 +146,12 @@
 
 - (void)createMovie:(NSArray *)image_urls toDirectory:(NSURL *)directoy
 {
-    NSFileManager* fm = [[[NSFileManager alloc] init] autorelease];
-    //Get the source image from file
     NSString *movie_path = [[directoy path] stringByAppendingString:@"/movie.mp4"];
+
+    NSFileManager* fm = [[[NSFileManager alloc] init] autorelease];
     [fm removeItemAtPath:movie_path error:NULL];
 
-    NSLog(@"MOVIEPATH %@", movie_path);
+    QTMovie *movie = [[QTMovie alloc] initToWritableFile:movie_path error:NULL];
 
     for (int i = 0; i < [image_urls count]; i++) {
         NSURL *url = [image_urls objectAtIndex:i];
@@ -160,19 +160,12 @@
         NSArray *columnsToCut = [self parseImage:source];
         NSArray *cuttedImages = [self cutImage:source at:columnsToCut rotate:TRUE];
 
-        QTMovie *movie;
-        
-        if (i == 0) {
-            movie = [[QTMovie alloc] initToWritableFile:movie_path error:NULL];
-        } else {
-            movie = [[QTMovie alloc] initWithFile:movie_path error:NULL];
-            [movie setAttribute:[NSNumber numberWithBool:YES] forKey:QTMovieEditableAttribute];
-        }
-
         [self addToMovie:cuttedImages to:movie];
-        
+
         [source release];
         NSLog(@"done... update movie");
     }
+
+    [movie release];
 }
 @end
