@@ -12,16 +12,6 @@
 
 @implementation LomoKinoMovie
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // Initialization code here.
-    }
-
-    return self;
-}
-
 // returns a array with pixels where to cut the original image
 - (NSArray *)parseImage:(NSImage *)source
 {
@@ -31,7 +21,6 @@
 
     // calculate the horizontal middle
     NSInteger horizontalMiddle = [rawImg pixelsHigh] / (long) 2.0;
-
 
     NSMutableArray *possiblePixelsToCut = [NSMutableArray array];
 
@@ -44,10 +33,13 @@
         if ([color brightnessComponent] < 0.1) {
             [possiblePixelsToCut addObject:[NSNumber numberWithInt:col]];
 
-            // just for coloring the found pixels red, only if you want make them visible
-            //[rawImg setColor:[NSColor redColor] atX:col y:horizontalMiddle-1];
-            //[rawImg setColor:[NSColor redColor] atX:col y:horizontalMiddle];
-            //[rawImg setColor:[NSColor redColor] atX:col y:horizontalMiddle+1];
+            if (false) {
+                // just for coloring the found pixels red, only if you want make them visible
+                [rawImg setColor:[NSColor redColor] atX:col y:horizontalMiddle-1];
+                [rawImg setColor:[NSColor redColor] atX:col y:horizontalMiddle];
+                [rawImg setColor:[NSColor redColor] atX:col y:horizontalMiddle+1];
+
+            }
         }
     }
 
@@ -92,8 +84,10 @@
             NSNumber *next = [columnsToCut objectAtIndex:idx+1];
             int width = [next intValue] - [current intValue];
 
-            NSLog(@"TARGET CURRENT:%d DIFF:%d", [current intValue], width);
-            NSLog(@"SOURCE CURRENT:%f DIFF:%f", [current intValue]/16.7, width/16.7);
+            if (false) {
+                NSLog(@"TARGET CURRENT:%d DIFF:%d", [current intValue], width);
+                NSLog(@"SOURCE CURRENT:%f DIFF:%f", [current intValue]/16.7, width/16.7);
+            }
 
             NSRect targetRect = NSMakeRect(0, 0, width, [rawImg pixelsHigh]);
             NSRect sourceRect = NSMakeRect([current intValue]/16.7, 0, width/16.7, [rawImg pixelsHigh]/16.7);
@@ -132,14 +126,6 @@
         NSDictionary *attrs = [NSDictionary dictionaryWithObject:@"jpeg" forKey:QTAddImageCodecType];
 
         [movie addImage:image forDuration:time withAttributes:attrs];
-
-        // Writing file to disk
-        //NSData *imageData = [target  TIFFRepresentation];
-        //NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
-        //imageData = [imageRep representationUsingType:NSJPEGFileType properties:nil];
-
-        //NSString *filePath = [NSString stringWithFormat:@"/Users/ben/Desktop/lomokino-samples/flatbed_with-sprockets_ben/2769_02_frame%d.jpg", idx];
-        //[imageData writeToFile: filePath atomically: NO];
         [movie updateMovieFile];
     }
 }
@@ -155,15 +141,32 @@
 
     for (int i = 0; i < [image_urls count]; i++) {
         NSURL *url = [image_urls objectAtIndex:i];
-        
+
         NSImage *source = [[NSImage alloc] initWithContentsOfURL:url];
         NSArray *columnsToCut = [self parseImage:source];
         NSArray *cuttedImages = [self cutImage:source at:columnsToCut rotate:TRUE];
 
+        if (true) {
+            // Writing file to disk
+            for (int idx = 0; idx < [cuttedImages count]; idx++) {
+                NSImage *image = [cuttedImages objectAtIndex:idx];
+                NSData *imageData = [image  TIFFRepresentation];
+                NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
+                imageData = [imageRep representationUsingType:NSJPEGFileType properties:nil];
+
+                NSString *filePath = [[directoy path] stringByAppendingString:
+                                                        [NSString stringWithFormat:@"/frame_%d_%d.jpg", i, idx]];
+                [imageData writeToFile: filePath atomically: NO];
+            }
+        }
+
         [self addToMovie:cuttedImages to:movie];
 
         [source release];
-        NSLog(@"done... update movie");
+        #ifdef DEBUG
+        NSLog(@"url: %@", url);
+        NSLog(@"done...");
+        #endif
     }
 
     [movie release];
