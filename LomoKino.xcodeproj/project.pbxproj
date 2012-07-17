@@ -17,8 +17,23 @@
 		B53D09121475BCA90036F614 /* NSImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = B53D09111475BCA90036F614 /* NSImage+Rotate.m */; };
 		B579A41914805E9000AC479B /* LomoKino.png in Resources */ = {isa = PBXBuildFile; fileRef = B579A41814805E9000AC479B /* LomoKino.png */; };
 		B579A41A14806AB000AC479B /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B547490C1470F6320082588D /* QuickTime.framework */; };
+		B59F06A7148277530097DCD4 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B59F06A6148277530097DCD4 /* Sparkle.framework */; };
+		B59F06AA148277DA0097DCD4 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B59F06A6148277530097DCD4 /* Sparkle.framework */; };
 		B5D17BC01470F79F0004B38A /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5D17BBF1470F79F0004B38A /* QTKit.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B59F06A9148277BE0097DCD4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B59F06AA148277DA0097DCD4 /* Sparkle.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B51467A1146D94DA00A17E68 /* LomoKino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LomoKino.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +56,7 @@
 		B547490C1470F6320082588D /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = System/Library/Frameworks/QuickTime.framework; sourceTree = SDKROOT; };
 		B579A41814805E9000AC479B /* LomoKino.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LomoKino.png; sourceTree = "<group>"; };
 		B596C47114814EBC003792EE /* LomoKino.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LomoKino.entitlements; sourceTree = "<group>"; };
+		B59F06A6148277530097DCD4 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		B5D17BBF1470F79F0004B38A /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -52,6 +68,7 @@
 				B579A41A14806AB000AC479B /* QuickTime.framework in Frameworks */,
 				B5D17BC01470F79F0004B38A /* QTKit.framework in Frameworks */,
 				B51467A6146D94DA00A17E68 /* Cocoa.framework in Frameworks */,
+				B59F06A7148277530097DCD4 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +98,7 @@
 		B51467A4146D94DA00A17E68 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B59F06A6148277530097DCD4 /* Sparkle.framework */,
 				B51467A5146D94DA00A17E68 /* Cocoa.framework */,
 				B51467A7146D94DA00A17E68 /* Other Frameworks */,
 			);
@@ -135,6 +153,7 @@
 				B514679D146D94DA00A17E68 /* Sources */,
 				B514679E146D94DA00A17E68 /* Frameworks */,
 				B514679F146D94DA00A17E68 /* Resources */,
+				B59F06A9148277BE0097DCD4 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -276,6 +295,10 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_ENTITLEMENTS = LomoKino/LomoKino.entitlements;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LomoKino/LomoKino-Prefix.pch";
 				INFOPLIST_FILE = "LomoKino/LomoKino-Info.plist";
@@ -292,6 +315,10 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_ENTITLEMENTS = LomoKino/LomoKino.entitlements;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LomoKino/LomoKino-Prefix.pch";
 				INFOPLIST_FILE = "LomoKino/LomoKino-Info.plist";
